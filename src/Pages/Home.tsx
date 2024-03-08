@@ -25,10 +25,7 @@ import { TbWorld } from "react-icons/tb";
 
 // <------------- image imports ------------- >
 import backgroundImg from "../assets/img/viper/viper-background-img.png";
-import mobileHeroLight from "../assets/img/hero/mobile.jpg";
-import mobileHeroDark from "../assets/img/hero/mobile-dark.jpg";
-import desktopHeroLight from "../assets/img/hero/desktop.jpeg";
-import desktopHeroDark from "../assets/img/hero/desktop-dark.jpg";
+
 import nftCoin1 from "../assets/img/viper/1.png"
 import nftCoin2 from "../assets/img/viper/2.png"
 import nftCoin3 from "../assets/img/viper/3.png"
@@ -61,9 +58,7 @@ export default function Home(props: { channelState: ChannelState }) {
     base: "mobile",
     lg: "desktop",
   });
-  const mobileHero = useColorModeValue(mobileHeroLight, mobileHeroDark);
 
-  const desktopHero = useColorModeValue(desktopHeroLight, desktopHeroDark);
   
   const floatKeyframes = keyframes`
     0% { transform: translateY(0); }

@@ -1,5 +1,5 @@
 import { Image } from "@chakra-ui/react";
-import ViperLogo from "../assets/img/atomic-swap-logo-dark-192.png";
+import ViperLogo from "../assets/img/viper-logo-dark-192.png";
 
 
 /**
