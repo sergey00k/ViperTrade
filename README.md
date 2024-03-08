@@ -1,48 +1,4 @@
-<div align="center">
-  <a href="https://atomic-swap.io/">
-    <img
-      src="./public/android-chrome-192x192.png"
-      alt="Atomic Swap Logo"
-      height="64"
-    />
-  </a>
-  <br />
-  <p>
-    <h3>
-      <b>
-        Atomic Swap
-      </b>
-    </h3>
-  </p>
-  <p>
-    <b>
-      Trustless p2p trading on Cardano
-    </b>
-  </p>
-  <p>
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen?logo=github)](CODE_OF_CONDUCT.md) [![Website](https://img.shields.io/website?url=https%3A%2F%2Fatomic-swap.io&logo=atomic-swap)](https://atomic-swap.io/) [![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fatomic-swap.io%2F)](https://twitter.com/intent/tweet?text=Atomic%20Swap%20-%20A%20trustless%20p2p%20trading%20dApp%20on%20Cardano.%20https%3A//atomic-swap.io/%20%23atomicswap%20via%20%40_atomicswap)
-
-  </p>
-  <p>
-    <sub>
-      Built with ❤︎ by
-      <a href="https://github.com/honungsburk/atomic-swap/graphs/contributors">
-        contributors
-      </a>
-    </sub>
-  </p>
-  <br />
-  <p>
-    <a href="https://atomic-swap.io/" target="_blank">
-      <img
-        src="./resources/atomic-swap-banner.jpeg"
-        alt="Atomic Swap"
-        width="100%"
-      />
-    </a>
-  </p>
-</div>
 
 ## Support
 
@@ -56,8 +12,6 @@
 * P2p networking between clients using webrtc
 * Super simple to self-host
 * PWA - progressive web app
-* Text chat
-* Voice chat
 * Blacklist/Whitelist assets
 * Dark mode
 
@@ -98,12 +52,9 @@ export const BLOCKFROST_ID_MAINNET = "...";
 export const BLOCKFROST_ID_TESTNET = "...";
 ```
 
-## **License**
-
-This project is licensed under the [GPL 3.0](https://opensource.org/licenses/GPL-3.0) - see the [`LICENSE`](LICENSE) file for details.
 
 ## **Authors**
 
-This project exists thanks to all the people who contribute — [contribute](CONTRIBUTING.md).
+This project derives its backend structure from the people who contribute — [contribute](CONTRIBUTING.md) and [honungsburk](https://github.com/honungsburk).
 
-* [honungsburk](https://github.com/honungsburk)
+All Frontend implementation was done by [sergey00k](https://github.com/sergey00k).
