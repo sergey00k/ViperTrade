@@ -19,8 +19,11 @@ export default function AssetListHeader(props: {
       <VStack>
         <HStack>
           <Heading
-            fontSize={["2xl", "3xl", null, null, null, "4xl"]}
+            textAlign={'center'}
+            fontSize={{ base: "0.9rem", md: "1.20rem", lg: "1.40rem", xl: "1.85rem" }}
             fontWeight={"bold"}
+            color={'white'}
+            fontFamily={'syne'}
           >
             {props.text}
           </Heading>

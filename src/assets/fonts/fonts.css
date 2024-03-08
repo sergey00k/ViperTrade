@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Syne';
+    src: url('./Syne/Syne-VariableFont_wght.ttf') format('truetype');
+    /* Additional font properties like font-weight and font-style can be specified here */
+  }
+
+@font-face {
+    font-family: 'Prompt';
+    src: url('./Prompt/Prompt-Medium.ttf') format('truetype');
+    /* Additional font properties like font-weight and font-style can be specified here */
+  }
+
+  @font-face {
+    font-family: 'Prompt-Light-italic';
+    src: url('./Prompt/Prompt-LightItalic.ttf') format('truetype');
+    /* Additional font properties like font-weight and font-style can be specified here */
+  }

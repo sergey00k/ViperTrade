@@ -46,6 +46,7 @@ import { HiSwitchHorizontal } from "react-icons/hi";
 import { IoMdWallet } from "react-icons/io";
 import { GoVerified } from "react-icons/go";
 
+
 // Blacklist & WhiteList
 
 export function Whitelist(props: IconProps) {
@@ -188,7 +189,7 @@ export function Map(props: IconProps) {
 
 // Social Media
 export function Discord(props: IconProps) {
-  return <Icon {...props} as={FaDiscord} />;
+  return <Icon {...props} as={FaDiscord} color={'white'} boxSize={30}/>;
 }
 
 export function Youtube(props: IconProps) {
@@ -196,7 +197,7 @@ export function Youtube(props: IconProps) {
 }
 
 export function Twitter(props: IconProps) {
-  return <Icon {...props} as={FaTwitter} />;
+  return <Icon {...props} as={FaTwitter} color={'white'} boxSize={30}/>;
 }
 
 export function Github(props: IconProps) {
@@ -232,15 +233,15 @@ export function Edit(props: IconProps) {
 }
 
 export function Lock(props: IconProps) {
-  return <Icon {...props} as={AiFillLock} />;
+  return <Icon {...props} as={AiFillLock} color="white"/>;
 }
 
 export function Unlock(props: IconProps) {
-  return <Icon {...props} as={AiOutlineUnlock} />;
+  return <Icon {...props} as={AiOutlineUnlock} color="white"/>;
 }
 
 export function Question(props: IconProps) {
-  return <Icon {...props} as={AiOutlineQuestionCircle} />;
+  return <Icon {...props} as={AiOutlineQuestionCircle} color="white"/>;
 }
 
 export function ContentCopy(props: IconProps) {

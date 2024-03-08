@@ -1,3 +1,20 @@
+import {
+  Center,
+  Heading,
+  Spacer,
+  VStack,
+  Text,
+  Image,
+  Button,
+  Box,
+  Flex,
+  Link,
+  useBreakpointValue,
+  useColorModeValue,
+  useDisclosure,
+  AspectRatio,
+} from "@chakra-ui/react";
+
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Env } from "../Env";
@@ -8,6 +25,15 @@ import Session from "./Session";
 import HasNoWallet from "./Session/HasNoWallet";
 import PendingTrade from "./Session/PendingTrade";
 import * as CardanoSerializationLib from "@emurgo/cardano-serialization-lib-browser";
+
+// <------------- image imports ------------- >
+import backgroundImg from "../assets/img/viper/viper-background-img.png";
+import mobileHeroLight from "../assets/img/hero/mobile.jpg";
+import mobileHeroDark from "../assets/img/hero/mobile-dark.jpg";
+import desktopHeroLight from "../assets/img/hero/desktop.jpeg";
+import desktopHeroDark from "../assets/img/hero/desktop-dark.jpg";
+
+
 
 export default function Trade(props: {
   env: Env;
@@ -53,14 +79,30 @@ export default function Trade(props: {
     return <></>; // TODO: display error message
   } else {
     return (
-      <Session
-        lib={props.lib}
-        onWalletChange={props.env.changeWallet}
-        channelState={channelState}
-        session={props.session}
-        store={props.store}
-        wallet={props.env.wallet}
-      />
+      <Box
+      bgImage={backgroundImg} 
+      bgSize="cover"
+      bgPosition="center"
+      minHeight="100vh"
+      paddingTop={0}
+      paddingBottom={'27%'} //300
+      position={'absolute'}
+      top={65}
+      left={0}
+      right={0}
+      bottom={0}
+      flex={1}
+      height={'100%'}
+      >
+        <Session
+          lib={props.lib}
+          onWalletChange={props.env.changeWallet}
+          channelState={channelState}
+          session={props.session}
+          store={props.store}
+          wallet={props.env.wallet}
+        />
+      </Box>
     );
   }
 }

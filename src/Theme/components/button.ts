@@ -7,12 +7,15 @@ const ghostIconButton = (props: StyleFunctionProps) => {
   return {
     ...defaultTheme.components.Button.variants.ghost(props),
     _focus: {
-      bg: mode("darken.200", "lighten.200")(props),
+      bg: mode("#B1232F", "#B1232F")(props),
+      textDecoration: "none",
     },
     _active: {
-      bg: mode("darken.300", "lighten.300")(props),
+      bg: mode("#B1232F", "#B1232F"),
+      textDecoration: "none",
     },
-    _hover: { bg: mode("darken.200", "lighten.200")(props) },
+    _hover: { bg: mode("#E85E6C", "lighten.200") },
+    textDecoration: "none"
   };
 };
 

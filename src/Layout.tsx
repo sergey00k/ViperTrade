@@ -42,9 +42,13 @@ import BlockFrostAPI from "./API/BlockFrost/BlockFrostAPI";
 import * as BlockFrostTypes from "./API/BlockFrost/Types";
 import ChatBar from "./components/ChatBar";
 import ComponentErrorBoundary from "./components/ErrorBoundary/ComponentErrorBoundary";
-import AtomicSwapLogo from "./components/Logo";
+import ViperLogo from "./components/Logo";
 import { usePWAInstall } from "./Hooks/PWA";
 import * as CardanoSerializationLib from "@emurgo/cardano-serialization-lib-browser";
+import arrow from "./assets/img/viper/arrow/arrow.png"
+
+///////////// image imports /////////////////
+import backgroundImg from "./assets/img/viper/viper-background-img.png"
 
 export default function Layout(props: {
   env: Env;
@@ -134,17 +138,15 @@ export default function Layout(props: {
       </VStack>
       <Outlet />
       <Spacer />
-      <Footer />
-      {chatbar}
     </Flex>
   );
-}
-
+  
+  }
 function BackendIsDown() {
   return (
     <Alert status="error" variant="solid">
       <AlertIcon />
-      The server is down! Atomic Swap will not function properly.
+      The server is down! Viper Trade will not function properly.
     </Alert>
   );
 }
@@ -162,15 +164,27 @@ function Header(props: {
 
   if (layout === "horizontal") {
     return (
-      <Flex p={2} align={"center"}>
+      <Flex position="fixed" top={0} width={'100%'} px={15} py={2} align={"center"} flexDirection={'row'} backgroundColor={'#212529'} justifyContent={'space-between'} height={65}>
         <HStack>
-          <Logo></Logo>
-          <VersionNumber />
+          <Logo></Logo>  
+          <Link as={ReachLink} to="/home" style={{ textDecoration: 'none' }}>     
+            <Text fontFamily={'syne'} fontWeight={'bold'} fontSize={{ base: "1rem", md: "1.4rem", lg: "1.6rem", xl: "2.21rem" }} //fontSize={{ base: "0.75rem", md: "1.05rem", lg: "1.2rem", xl: "1.7rem" }} <---- better sizing if color is white
+              style={{    color: 'transparent', 
+              backgroundImage: `url(${backgroundImg})`, 
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              backgroundSize: '110px', 
+              backgroundPosition: 'top',
+            }}
+            >
+              VIPERTRADE {/* position={'relative'} top={-15}*/}
+            </Text>
+          </Link> 
         </HStack>
-        <Spacer />
         <HStack>
           <SessionStatus status={props.channelState} />
-          <NavBar env={props.env} status={props.channelState} lib={props.lib} />
+          <Text color={'white'} fontFamily={'syne'} fontWeight={'bold'}>Back to ViperSwap</Text>
+          {/*<Image src={arrow} boxSize={50}></Image>*/}
         </HStack>
       </Flex>
     );
@@ -190,7 +204,7 @@ function Logo() {
   return (
     <Center>
       <Link as={ReachLink} to="/home">
-        <AtomicSwapLogo boxSize="48px" />
+        <ViperLogo boxSize="48px" />
       </Link>
     </Center>
   );
@@ -238,8 +252,8 @@ function SessionStatus(props: { status: ChannelState }) {
   const sizes = [5];
   const fontSizes = [12];
 
-  let bgColor = "secondary";
-  let hoverColor = "secondary.600";
+  let bgColor = "#A53135";
+  let hoverColor = "#822329";
 
   if (props.status === "Destroyed") {
     bgColor = "failure";
@@ -257,11 +271,11 @@ function SessionStatus(props: { status: ChannelState }) {
           minWidth={sizes}
           height={sizes}
           rounded={20}
-          bgColor={bgColor + ".500"}
+          bgColor={bgColor}
           cursor={"pointer"}
           _hover={{ bgColor: hoverColor }}
           _active={{
-            bg: bgColor + ".700",
+            bg: bgColor ,
             transform: "scale(0.98)",
           }}
           onClick={() => onToggle()}
@@ -397,38 +411,7 @@ function Wallet(props: {
   );
 }
 
-function Footer() {
-  const layout: "vertical" | "horizontal" | undefined = useBreakpointValue({
-    base: "vertical",
-    sm: "horizontal",
-  });
 
-  const iconColor = useColorModeValue("black", "white");
-
-  return (
-    <Box
-      as="footer"
-      role="contentinfo"
-      mx="auto"
-      maxW="7xl"
-      pt="4"
-      pb={layout === "vertical" ? "20" : "4"}
-      px={{ base: "4", md: "8" }}
-    >
-      <HStack>
-        <Link href="https://github.com/honungsburk/atomic-swap" target="_blank">
-          <Icon w={8} h={8} color={iconColor} as={Icons.Github} />
-        </Link>
-        <Link href="https://discord.gg/ZqpN4TuJ6a" target="_blank">
-          <Icon w={8} h={8} color={iconColor} as={Icons.Discord} />
-        </Link>
-        <Link href="https://twitter.com/_atomicswap" target="_blank">
-          <Icon w={8} h={8} color={iconColor} as={Icons.Twitter} />
-        </Link>
-      </HStack>
-    </Box>
-  );
-}
 
 // The version number of the app
 function VersionNumber(): JSX.Element {
@@ -456,8 +439,7 @@ function TermsOfUse() {
           <ModalCloseButton />
           <ModalBody>
             <Text>
-              By using this product you accept that the creator of this product,
-              Frank Hampus Weslien, is not responsible for any loss of funds due
+              By using this product you accept that the creator of this product is not responsible for any loss of funds due
               to any reason. It is the responsibility of the user to verify the
               correctness of the transaction before signing it with their
               wallet.

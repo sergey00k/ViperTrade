@@ -45,12 +45,13 @@ export default function CommissionInfo(props: { commission: BigNum }) {
       <PopoverTrigger>
         <HStack cursor="pointer" spacing={1}>
           <Question />
-          <Text fontSize={fontSize} fontWeight={"light"}>
+          <Text color={'white'} fontSize={fontSize} fontWeight={"light"}>
             Commission:{" "}
           </Text>
           <UnitDisplay
             fontSize={fontSize}
             fontWeight={"light"}
+            color={'white'}
             quantity={props.commission}
             decimals={6}
             symbol={"₳"}

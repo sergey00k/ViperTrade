@@ -9,8 +9,14 @@ import {
   Heading,
   useBreakpointValue,
   Link,
+  Box, 
+  Image
 } from "@chakra-ui/react";
 import React from "react";
+import { useState, useEffect } from 'react';
+import { keyframes } from "@emotion/react"
+
+
 import type {
   Address,
   AssetName,
@@ -32,13 +38,11 @@ import {
 } from "cardano-web-bridge-wrapper/lib";
 import * as ValueExtra from "../Cardano/ValueExtra";
 import * as BigNumExtra from "../Cardano/BigNumExtra";
-import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import Store from "../Storage/Store";
 import LockAndSign from "./Session/LockAndSign";
 import { SelectedAsset } from "./Session/Types";
 import AssetList from "./Session/AssetList";
-import { KawaiiMood } from "react-kawaii";
 import OfferReponsePrompt from "./Session/OfferResponsePrompt";
 import AcceptOfferPrompt from "./Session/AcceptOfferPrompt";
 import AssetListHeader from "./Session/AssetListHeader";
@@ -51,6 +55,16 @@ import ToolTip from "../components/ToolTip";
 import * as Icons from "../components/Icons";
 import { DialogBox } from "../components/DialogBox";
 
+//////////// image imports //////////////
+import viperWallet from "../assets/img/viper/wallet-min.png";
+import viperMail from "../assets/img/viper/invite-min.png";
+import ViperLogo from "../components/Logo";
+import swapPng from "../assets/img/viper/swap-min.png"
+
+//////////// animation imports /////////////
+import FireAnimation from "../components/FireAnimationLogo"
+
+
 function Session(props: {
   onWalletChange: (wallet: BasicWallet) => void;
   channelState: ChannelState;
@@ -59,6 +73,36 @@ function Session(props: {
   store: Store;
   lib: typeof CardanoSerializationLib;
 }) {
+
+  /////////// HEADER ATTEMPT //////////
+
+
+  const fadeInKeyframes = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+  ` ;
+
+  const fadeOutKeyframes = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+  ` ;
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setIsVisible(true);
+  }, 500);
+
+  return () => clearTimeout(timer);
+  },);
+
+  const [isHovered, setIsHovered] = useState(false);
+
+
+
+  /////////// HEADER ATTEMPT //////////
+
   const layout: "vertical" | "horizontal" | undefined = useBreakpointValue({
     base: "vertical",
     lg: "horizontal",
@@ -352,9 +396,36 @@ type LayoutProps = {
 };
 
 function HorizontalLayout(props: LayoutProps) {
+    /////////// HEADER ATTEMPT //////////
+
+
+    const fadeInKeyframes = keyframes`
+    from { opacity: 0; }
+    to { opacity: 1; }
+    ` ;
+  
+    const fadeOutKeyframes = keyframes`
+    from { opacity: 1; }
+    to { opacity: 0; }
+    ` ;
+  
+    const [isVisible, setIsVisible] = useState(false);
+  
+    useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 300);
+  
+    return () => clearTimeout(timer);
+    },);
+  
+    const [isHovered, setIsHovered] = useState(false);
+  
+  
+  
+    /////////// HEADER ATTEMPT //////////
   return (
-    <Flex my={6}>
-      <Spacer />
+    <Flex  height={'100%'} width={'100%'} marginTop={95} px={'3.4%'} justifyContent={'space-between'}>
       <MySide
         lib={props.lib}
         isTesting={props.isTesting}
@@ -369,10 +440,26 @@ function HorizontalLayout(props: LayoutProps) {
         selectedAssets={props.mySelectedAssets}
         addNativeAsset={props.updateNativeAsset}
       />
-      <Spacer />
-      <VStack spacing={8}>
-        <Header />
-        <SessionController
+      <VStack spacing={8}> 
+        <VStack justifyContent={'space-between'}  marginTop={'-10%'}>
+          <VStack marginTop={'-2.4%'} spacing={0} position={'absolute'} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <Box zIndex={2} position={'relative'}>
+              <ViperLogo boxSize="140px"/>
+            </Box>
+            <Box zIndex={1} width={'55%'} position={'relative'} bottom={20} marginTop={-50} {...(isHovered ? { opacity: 0, animation: `${fadeInKeyframes} 0.5s forwards`} : { opacity: 1, animation: `${fadeOutKeyframes} 0.7s forwards` })}>
+              <Box {...(isVisible ? { opacity: 1 } : { opacity: 0 })}>
+                <FireAnimation />
+              </Box>
+            </Box>
+          </VStack>
+        <Heading  color={'white'} position={'absolute'} top={185} fontFamily={'syne'} fontWeight={'bold'} fontSize={{ base: "1rem", md: "1.4rem", lg: "1.6rem", xl: "2.21rem" }}>
+          VIPERTRADE {/* position={'relative'} top={-15}*/}
+        </Heading>
+        <Text color={'white'} position={'absolute'} top={227} fontFamily={'syne'} fontWeight={'bold'} textAlign={"center"} fontSize={{ base: "0.5rem", md: "0.8rem", lg: "1rem", xl: "1.18rem" }}>
+          Peer-To-Peer Trades Done Right {/*position={'relative'} top={-21} */}
+        </Text> {!props.hasWallet ? (<Image  src={swapPng} position={'absolute'} top={264} height={12}/>) : <></>} 
+      </VStack>
+      <SessionController
           lib={props.lib}
           numberOfAssets={
             props.mySelectedAssets.length + props.theirSelectedAssets.length
@@ -386,7 +473,6 @@ function HorizontalLayout(props: LayoutProps) {
           missMatchError={props.tradeMissMatch}
         />
       </VStack>
-      <Spacer />
       <TheirSide
         lib={props.lib}
         isLocked={props.iAmLocked}
@@ -398,7 +484,6 @@ function HorizontalLayout(props: LayoutProps) {
         commission={props.commission}
         theirSelectedAssets={props.theirSelectedAssets}
       />
-      <Spacer />
     </Flex>
   );
 }
@@ -432,7 +517,6 @@ function VerticalLayout(props: LayoutProps) {
         theirSelectedAssets={props.theirSelectedAssets}
       />
       <VStack>
-        <Heading>Lock & Sign</Heading>
         <SessionController
           lib={props.lib}
           numberOfAssets={
@@ -529,15 +613,15 @@ function ConnectWallet(props: {
   lib: typeof CardanoSerializationLib;
 }) {
   return (
-    <VStack spacing={6} width={assetWidths}>
+    <VStack justifyContent={'space-between'} spacing={7} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} paddingBottom={50}>
       <AssetListHeader
         address={null}
-        text="Connect Your Wallet"
+        text="Connect your wallet"
         networkID={null}
         commission={props.lib.BigNum.zero()}
       />
-      <CreditCard size={200} color={colors.default.characters.creditcard} />
-      <WalletConnectButton
+      <Image width={'67%'} height={'60%'} src={viperWallet}/>
+      <WalletConnectButton 
         onWalletChange={props.onWalletChange}
         lib={props.lib}
       />
@@ -560,9 +644,21 @@ function MyAssets(props: {
     amount: BigNum
   ) => void;
   lib: typeof CardanoSerializationLib;
-}) {
+  }) {   
+  const [showEmptyState, setShowEmptyState] = useState(false);
+
+
+  useEffect(() => {
+    if (props.selectedAssets.length === 0) {
+      setShowEmptyState(true);
+    } else {
+      setShowEmptyState(false);
+    }
+  }, [props.isLocked]);
+
+
   return (
-    <VStack spacing={6} width={assetWidths}>
+    <VStack justifyContent={'space-between'} px={'1.2%'} spacing={7} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} paddingBottom={50}>
       <AssetListHeader
         isTesting={props.isTesting}
         address={props.address}
@@ -570,36 +666,54 @@ function MyAssets(props: {
         networkID={props.networkID}
         commission={props.commission}
       />
-
       {props.selectedAssets.length === 0 ? (
-        <AssetListEmptyState version="YouWillSend" />
+        (showEmptyState || !showEmptyState) ? (
+          <VStack justifyContent={'space-between'} height={'26%'}>
+            <AssetListEmptyState version="YouWillSend" locked={props.isLocked}/>
+            {!props.isLocked ? (
+              <AddAsset
+                height={50}
+                lib={props.lib}
+                assets={props.availableAssets}
+                onAddADA={() =>
+                  props.onAdaChange(props.lib.BigNum.from_str("1000000"))
+                }
+                onAddNativeAsset={props.addNativeAsset}
+              />
+            ) : (
+              <></>
+            )}
+          </VStack>
+        ) : (<></>)
       ) : (
-        <AssetList
-          isLocked={props.isLocked}
-          isEditable={!props.isLocked}
-          assets={props.selectedAssets}
-          onAdaChange={(ada) => {
-            props.onAdaChange(ada);
-          }}
-          onAddNativeAsset={props.addNativeAsset}
-        />
-      )}
-
-      {!props.isLocked ? (
-        <AddAsset
-          lib={props.lib}
-          assets={props.availableAssets}
-          onAddADA={() =>
-            props.onAdaChange(props.lib.BigNum.from_str("1000000"))
-          }
-          onAddNativeAsset={props.addNativeAsset}
-        />
-      ) : (
-        <></>
+        <>
+          <AssetList
+            isLocked={props.isLocked}
+            isEditable={!props.isLocked}
+            assets={props.selectedAssets}
+            onAdaChange={(ada) => {
+              props.onAdaChange(ada);
+            }}
+            onAddNativeAsset={props.addNativeAsset}
+          />
+          {!props.isLocked ? (
+            <AddAsset
+              height={110}
+              lib={props.lib}
+              assets={props.availableAssets}
+              onAddADA={() =>
+                props.onAdaChange(props.lib.BigNum.from_str("1000000"))
+              }
+              onAddNativeAsset={props.addNativeAsset}
+            />
+          ) : (
+            <></>
+          )}
+        </>
       )}
     </VStack>
   );
-}
+}  
 
 function SessionController(props: {
   isTesting: boolean;
@@ -617,12 +731,6 @@ function SessionController(props: {
 
   if (props.wallet === undefined) {
     component = <></>;
-  } else if (props.numberOfAssets <= 0) {
-    component = (
-      <DialogBox icon={<Icons.Info />} headerText="Info">
-        Waiting for assets to be added
-      </DialogBox>
-    );
   } else if (props.offer === undefined) {
     const wallet = props.wallet;
     component = (
@@ -802,7 +910,7 @@ function TheirAssets(props: {
         commission={props.commission}
       />
       {props.theirSelectedAssets.length === 0 ? (
-        <AssetListEmptyState version="TheyWillSend" />
+        <AssetListEmptyState version="TheyWillSend" locked={props.isLocked}/>
       ) : (
         <></>
       )}
@@ -828,29 +936,28 @@ function ThereIsNoOneHere(props: {
   lib: typeof CardanoSerializationLib;
 }) {
   return (
-    <VStack spacing={6} width={assetWidths}>
-      <VStack spacing={1}>
+    <VStack justifyContent={'space-between'} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} px={'2.5%'} paddingBottom={50}>
+      {/*<VStack spacing={1}>*/}
         <AssetListHeader
-          text="Invite Someone To Trade"
+          text="Invite someone to trade"
           networkID={null}
           address={null}
           commission={props.lib.BigNum.zero()}
         />
-        <Text textAlign={"center"} fontSize={["md", "lg"]}>
-          Send the link to someone you want to trade with.
-        </Text>
-        <Copy label={"Link Copied!"} copy={props.link}>
-          <ToolTip label={props.link}>
-            <Button
+        <Image width={'83.6%'} src={viperMail}/>
+        <Box width={'100%'} height={'15.4%'}>
+        <Copy  label={"Link Copied!"} copy={props.link}>
+          <ToolTip  width={'100%'} height={'100%'} label={props.link}>
+            <Button width={'100%'} height={'100%'} fontFamily={'Syne'} fontSize={{ base: "0.9rem", md: "1.20rem", lg: "1.40rem", xl: "1.6rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}
               aria-label="Copy"
-              colorScheme="primary"
               leftIcon={<Icons.ContentCopy />}
             >
-              Copy Invite Link
+              COPY INVITE LINK
             </Button>
           </ToolTip>
         </Copy>
-      </VStack>
+        </Box>
+      {/*</VStack>
       <QRCode value={props.link} width={200} height={200}></QRCode>
       <VStack spacing={8}>
         <Text textAlign={"center"} fontSize={["lg", "xl"]}>
@@ -860,33 +967,35 @@ function ThereIsNoOneHere(props: {
         <Link href={props.link} isExternal={true} _hover={{}}>
           <Button colorScheme={"secondary"}>TEST MODE</Button>
         </Link>
-      </VStack>
+      </VStack>*/}
     </VStack>
   );
 }
 
 function AssetListEmptyState(props: {
   version: "YouWillSend" | "TheyWillSend";
-}) {
+  locked: true | false
+} ) {
   let text = "You haven't added any assets!";
-  let mood: KawaiiMood = "blissful";
 
   if (props.version === "TheyWillSend") {
     text = "They haven't added any assets!";
-    mood = "shocked";
   }
 
   return (
-    <VStack spacing={2}>
-      <Ghost size={240} mood={mood} color={colors.default.characters.ghost} />
-      <Text fontSize={14} fontWeight={"medium"}>
+      <Text textAlign={'center'}
+            fontSize={{ base: "0.6rem", md: "0.89rem", lg: "1rem", xl: "1.3rem" }}
+            fontWeight={"bold"}
+            color={'white'}
+            fontFamily={'syne'}
+            style={props.locked ? { marginTop: 71 } : {}}>
         {text}
       </Text>
-    </VStack>
   );
 }
 
 function AddAsset(props: {
+  height: number;
   assets: CardanoAsset.Asset[];
   onAddADA: () => void;
   onAddNativeAsset: (
@@ -899,7 +1008,7 @@ function AddAsset(props: {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen} colorScheme="primary">
+      <Button onClick={onOpen} width={'77%'} height={props.height} fontFamily={'Syne'} fontSize={{ base: "0.9rem", md: "1.20rem", lg: "1.40rem", xl: "1.6rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}>
         ADD ASSET
       </Button>
       <AssetSelector

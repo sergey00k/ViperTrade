@@ -6,8 +6,8 @@ function Copy(props: { label: string; copy: string } & BoxProps) {
   const { label, copy, children, onClick, ...rest } = props;
   const { hasCopied, onCopy } = useClipboard(copy);
   return (
-    <Tooltip hasArrow isOpen={hasCopied} label={label}>
-      <Box
+    <Tooltip width={'100%'} height={'100%'} hasArrow isOpen={hasCopied} label={label}>
+      <Box width={'100%'} height={'100%'}
         cursor="pointer"
         onClick={(event) => {
           onCopy();

@@ -52,8 +52,8 @@ export default function WalletSelector(props: {
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
-      <ModalContent bgColor={colorMode.bgColor}>
-        <ModalHeader>Choose Wallet</ModalHeader>
+      <ModalContent bgColor={'#121315'}>
+        <ModalHeader color={'white'} >Choose Wallet</ModalHeader>
         <ModalCloseButton colorScheme={"whiteAlpha"} />
         <ModalBody>
           <VStack width={"fill"}>
@@ -80,8 +80,8 @@ function WalletChoice(props: {
   lib: typeof CardanoSerializationLib;
 }) {
   const colorMode = useColorModeValue(
-    { bgColor: "accent.500", bgHoverColor: "accent.500" },
-    { bgColor: "accentDarkMode.500", bgHoverColor: "accentDarkMode.400" }
+    { bgColor: "#212529" },
+    { bgColor: "#212529" }
   );
 
   return (
@@ -89,9 +89,6 @@ function WalletChoice(props: {
       px={8}
       py={4}
       bgColor={colorMode.bgColor}
-      _hover={{
-        bgColor: colorMode.bgHoverColor,
-      }}
       cursor={"pointer"}
       onClick={async () => {
         const fullAPI = await props.api.enable();
@@ -101,8 +98,8 @@ function WalletChoice(props: {
       rounded={8}
     >
       <Center>
-        <Text fontSize={32} fontWeight={"bold"}>
-          {props.api.name}
+        <Text color={'white'} fontSize={32} fontWeight={"bold"}>
+          {props.api.name.charAt(0).toUpperCase() + props.api.name.slice(1)}
         </Text>
       </Center>
       <Spacer></Spacer>

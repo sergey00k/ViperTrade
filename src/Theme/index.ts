@@ -35,7 +35,7 @@ const global = (props: Dict<any>) => ({
 });
 
 const shadows = {
-  outline: "0 0 0 3px " + colors.primary[300],
+  outline: "0 0 0 0 " + colors.primary[300],
 };
 
 export const Theme = extendTheme({

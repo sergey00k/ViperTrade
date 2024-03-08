@@ -5,7 +5,7 @@ import { Env } from "./Env";
 import SessionHolder from "./Network/SessionHolder";
 import * as NetworkSession from "./Network/Session";
 
-import { useInterval, useToast } from "@chakra-ui/react";
+import { useInterval, useToast  } from "@chakra-ui/react";
 import PageErrorBoundary from "./components/ErrorBoundary/PageErrorBoundary";
 
 import Store, { TransactionEntryV1 } from "./Storage/Store";
@@ -29,6 +29,10 @@ const Trade = lazy(() => import("./Pages/Trade"));
 const Settings = lazy(() => import("./Pages/Settings"));
 const FAQ = lazy(() => import("./Pages/FAQ"));
 const NotFound = lazy(() => import("./Pages/NotFound"));
+const Guide = lazy(() => import("./Pages/Guide"));
+
+// fonts
+import './assets/fonts/fonts.css'
 
 declare global {
   interface Window {
@@ -37,6 +41,16 @@ declare global {
 }
 
 function App() {
+
+  React.useEffect(() => {
+    // Disable scrolling when the component mounts
+    document.body.style.overflow = "hidden";
+    // Re-enable scrolling when the component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   const toast = useToast();
   const displayMode = PWA.getPWADisplayMode();
 
@@ -273,6 +287,15 @@ function App() {
                 </PageErrorBoundary>
               }
             />
+            <Route
+              path="/guide"
+              element={
+                <PageErrorBoundary>
+                  <Guide />
+                </PageErrorBoundary>
+              }
+            />
+            
             <Route
               path="/whitepaper"
               element={

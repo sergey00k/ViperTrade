@@ -116,7 +116,7 @@ export default function Asset(props: AssetProps & BoxProps) {
 
   return (
     <Box
-      minWidth={["100%", "sm", "md"]}
+      /*minWidth={["100%", "sm", "md"]}*/
       background={bgColor}
       color={textColor}
       _hover={{ bg: hoverColor }}
@@ -124,11 +124,12 @@ export default function Asset(props: AssetProps & BoxProps) {
       onClick={onToggle}
       cursor="pointer"
       overflow="hidden"
+      height={'25%'}
       width={"100%"}
       {...rest}
     >
       <Collapse startingHeight={"52px"} in={isOpen} style={{ width: "100%" }}>
-        <Flex direction="row" alignItems={"stretch"} alignSelf="stretch">
+        <Flex paddingLeft={2} direction="row" alignItems={"stretch"} alignSelf="stretch">
           <LockStrip type={isLocked ? "Locked" : "Unlocked"} isOpen={isOpen} />
           <VStack
             align={"left"}
@@ -137,15 +138,14 @@ export default function Asset(props: AssetProps & BoxProps) {
             width={"100%"}
             alignItems="stretch"
           >
-            <Flex height="44px">
+            <Flex height="100%"> {/*44px*/}
               <HStack>
                 <Center
                   maxWidth="40px"
-                  maxHeight="40px"
                   rounded="full"
                   overflow="hidden"
                 >
-                  <Image draggable={false} width="full" src={src} />
+                  <Image draggable={false} height={6} src={src} />
                 </Center>
                 <Center>
                   <Text
@@ -189,7 +189,7 @@ export default function Asset(props: AssetProps & BoxProps) {
                 {props.onDelete ? (
                   <Center onClick={(e) => e.stopPropagation()}>
                     <CloseButton
-                      size="md"
+                      size={'sm'}
                       aria-label="Remove Asset"
                       onClick={props.onDelete}
                     />
@@ -197,11 +197,7 @@ export default function Asset(props: AssetProps & BoxProps) {
                 ) : null}
               </HStack>
             </Flex>
-            {props.asset.kind === "ADA" ? (
-              <ADAExtraInfo />
-            ) : (
-              <NativeAssetExtraInfo nativeAsset={props.asset} />
-            )}
+
           </VStack>
           <Hidden isHidden={listStatus === undefined} hasSpace={true}>
             <ListStrip type={listStatus} isOpen={isOpen} />
@@ -298,7 +294,7 @@ function Strip(
       <Hidden isHidden={!isOpen}>
         <Text
           pt="2"
-          fontSize={9}
+          fontSize={4}
           fontWeight={"bold"}
           textAlign={"center"}
           textTransform={"uppercase"}
@@ -383,17 +379,17 @@ function EditableAmount(props: EditableAmountProps) {
   const colorMode = useColorModeValue(
     {
       color: "black",
-      borderColor: "accent.800",
-      borderActiveColor: "primary.500",
+      borderColor: "#A53135",
+      borderActiveColor: "#822329",
       adaColor: "white",
-      adaBorderColor: "accentDarkMode.500",
+      adaBorderColor: "#A53135",
     },
     {
       color: "white",
-      borderColor: "accentDarkMode.400",
-      borderActiveColor: "primary.200",
+      borderColor: "#A53135",
+      borderActiveColor: "#822329",
       adaColor: "black",
-      adaBorderColor: "accent.700",
+      adaBorderColor: "#A53135",
     }
   );
 
@@ -418,10 +414,10 @@ function EditableAmount(props: EditableAmountProps) {
           borderColor={isOpen ? colorMode.borderActiveColor : borderColor}
           _hover={{ borderColor: colorMode.borderActiveColor }}
         >
-          <Icons.Edit color={color} fontSize={16} />
+          <Icons.Edit color={color} fontSize={18} />
           <UnitDisplay
             color={color}
-            fontSize={16}
+            fontSize={14}
             fontWeight={"bold"}
             quantity={props.value}
             decimals={props.decimals}

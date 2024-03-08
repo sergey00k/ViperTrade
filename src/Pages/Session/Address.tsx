@@ -12,20 +12,20 @@ export default function Address(props: {
 }) {
   const colorMode = useColorModeValue(
     {
-      color: "black",
-      bgColor: "accent.500",
-      bgHoverColor: "accent.700",
+      color: "white",
+      bgColor: "#A53135",
+      bgHoverColor: "#822329",
       colorTest: "white",
       bgTestColor: "secondary.500",
-      bgHoverTestColor: "secondary.700",
+      bgHoverTestColor: "#822329",
     },
     {
       color: "white",
-      bgColor: "accentDarkMode.700",
-      bgHoverColor: "accentDarkMode.500",
+      bgColor: "#A53135",
+      bgHoverColor: "#822329",
       colorTest: "black",
       bgTestColor: "secondary.500",
-      bgHoverTestColor: "secondary.300",
+      bgHoverTestColor: "#822329",
     }
   );
 

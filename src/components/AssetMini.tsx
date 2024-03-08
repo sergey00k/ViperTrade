@@ -29,11 +29,11 @@ function AssetMini(props: {
       bgColor: "accent.500",
       bgHoverColor: "accent.600",
       bgActiveColor: "accent.700",
-      colorADA: "white",
-      bgColorADA: "accentDark.500",
-      bgHoverColorADA: "accentDark.600",
-      bgActiveColorADA: "accentDark.700",
-      adaImg: adaLight,
+      colorADA: "black",
+      bgColorADA: "#D6D9DC",
+      bgHoverColorADA: "#A53135",
+      bgActiveColorADA: "#A53135",
+      adaImg: adaDark,
     },
     {
       color: "white",
@@ -41,7 +41,7 @@ function AssetMini(props: {
       bgHoverColor: "accentDarkMode.500",
       bgActiveColor: "accentDarkMode.400",
       colorADA: "black",
-      bgColorADA: "accent.700",
+      bgColorADA: '#D6D9DC',
       bgHoverColorADA: "accent.500",
       bgActiveColorADA: "accent.300",
       adaImg: adaDark,
@@ -50,7 +50,7 @@ function AssetMini(props: {
 
   let color = colorMode.color;
   let bgColor = colorMode.bgColor;
-  let hoverColor = colorMode.bgHoverColor;
+  let hoverColor = '#A53135';
   let activeBackground = colorMode.bgActiveColor;
 
   if (props.asset.kind === "NativeAsset") {
@@ -81,7 +81,7 @@ function AssetMini(props: {
       px={"4"}
       _hover={{ bgColor: hoverColor }}
       _active={{
-        bg: activeBackground,
+        bg: hoverColor,
         transform: "scale(0.98)",
       }}
       onClick={() => {

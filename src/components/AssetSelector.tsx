@@ -38,12 +38,12 @@ function AssetSelector(props: AssetSelectorProps) {
       bgColor: "background.dark",
     }
   );
-  return (
+  return ( 
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
-      <ModalContent bgColor={colorMode.bgColor}>
-        <ModalHeader>Add Asset</ModalHeader>
-        <ModalCloseButton />
+      <ModalContent bgColor={'#212529'}>
+        <ModalHeader color={'white'}>Add Asset</ModalHeader>
+        <ModalCloseButton color={'white'} />
         <ModalBody>
           <AssetSelectorList
             assets={props.assets}
@@ -54,7 +54,7 @@ function AssetSelector(props: AssetSelectorProps) {
           />
         </ModalBody>
       </ModalContent>
-    </Modal>
+          </Modal>
   );
 }
 
@@ -85,6 +85,7 @@ function AssetSelectorList(props: {
         />
         <InputRightElement mx={"4"}>
           <CloseButton
+            color={'white'}
             size="md"
             aria-label="Reset Search"
             onClick={() => setSearch("")}

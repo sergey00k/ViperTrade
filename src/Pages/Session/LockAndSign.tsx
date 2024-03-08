@@ -35,28 +35,28 @@ export default function LockAndSign(props: LockAndSignProps) {
   };
 
   return (
-    <VStack>
+    <VStack marginTop={170}>
       <HStack>
         {lockIcon(props.isLocked)}
         {props.isLocked ? (
           <Button
             onClick={props.onUnlock}
-            variant={"outline"}
-            colorScheme="primary"
+            borderColor={'#521D51'}
+            borderWidth={2}
+            width={122} height={33} fontFamily={'Syne'} fontSize={{ base: "0.72rem", md: "1rem", lg: "1.16rem", xl: "1.3rem" }} fontWeight={'bold'} backgroundColor="transparent" color='white' rounded={0} _hover={{backgroundColor: "#7C3A7A",textDecoration: 'none' }}
           >
             UNLOCK
           </Button>
         ) : (
-          <Button onClick={props.onLock} colorScheme="primary">
+          <Button onClick={props.onLock} width={122} height={33} fontFamily={'Syne'} fontSize={{ base: "0.72rem", md: "1rem", lg: "1.16rem", xl: "1.3rem" }} fontWeight={'bold'} backgroundColor="#521D51" color='white' rounded={0} _hover={{backgroundColor: "#7C3A7A",textDecoration: 'none' }}>
             LOCK
           </Button>
         )}
         {lockIcon(props.theyAreLocked)}
       </HStack>
-      <Button
+      <Button width={122} height={33} fontFamily={'Syne'} fontSize={{ base: "0.72rem", md: "1rem", lg: "1.16rem", xl: "1.3rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}
         disabled={!props.isLocked || !props.isMatching}
         isLoading={isLoading}
-        colorScheme="success"
         loadingText="Creating Tx"
         onClick={() => {
           setIsLoading(true);
