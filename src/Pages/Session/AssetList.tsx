@@ -22,7 +22,7 @@ type AssetListProps = {
 
 export default function AssetList(props: AssetListProps) {
   return (
-    <VStack height={'100%'} width={'100%'}>
+    <VStack height={'100%'} width={'100%'} style={{ overflowY: 'auto', maxHeight: '200px' }}>
       {props.assets.map((selectedAsset) => {
         if (!props.isEditable) {
           return (

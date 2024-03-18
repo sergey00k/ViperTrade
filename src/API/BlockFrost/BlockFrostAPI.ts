@@ -75,11 +75,10 @@ export default class BlockFrostAPI implements Types.API {
       if (result) {
         await delay(100 * 2 ** iterations);
       }
-      const rawResult = await fetch(this.basePath + endpoint, {
+      const rawResult = await fetch( 'https://cardano-mainnet.blockfrost.io/api/v0' + endpoint, {
         headers: {
           ...headers,
-          "User-Agent": "atomic-swap",
-          "Cache-Control": "no-cache",
+          "project_id": ""
         },
         method: body ? "POST" : "GET",
         body,

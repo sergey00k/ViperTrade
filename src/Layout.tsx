@@ -182,7 +182,9 @@ function Header(props: {
         </HStack>
         <HStack>
           <SessionStatus status={props.channelState} />
-          <Text color={'white'} fontFamily={'syne'} fontWeight={'bold'}>Back to ViperSwap</Text>
+          <a href="https://viperswap.app/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <Text color={'white'} fontFamily={'syne'} fontWeight={'bold'}>Back to ViperSwap</Text>
+          </a>
           {/*<Image src={arrow} boxSize={50}></Image>*/}
         </HStack>
       </Flex>

@@ -447,9 +447,7 @@ function HorizontalLayout(props: LayoutProps) {
               <ViperLogo boxSize="140px"/>
             </Box>
             <Box zIndex={1} width={'55%'} position={'relative'} bottom={20} marginTop={-50} {...(isHovered ? { opacity: 0, animation: `${fadeInKeyframes} 0.5s forwards`} : { opacity: 1, animation: `${fadeOutKeyframes} 0.7s forwards` })}>
-              <Box {...(isVisible ? { opacity: 1 } : { opacity: 0 })}>
-                <FireAnimation />
-              </Box>
+             {(isVisible ? <FireAnimation /> : <></>)}
             </Box>
           </VStack>
         <Heading  color={'white'} position={'absolute'} top={185} fontFamily={'syne'} fontWeight={'bold'} fontSize={{ base: "1rem", md: "1.4rem", lg: "1.6rem", xl: "2.21rem" }}>
@@ -613,7 +611,7 @@ function ConnectWallet(props: {
   lib: typeof CardanoSerializationLib;
 }) {
   return (
-    <VStack justifyContent={'space-between'} spacing={7} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} paddingBottom={50}>
+    <VStack justifyContent={'space-between'} spacing={7} backgroundColor={"#581F50"} width={'29%'} height={'52%'} paddingTop={'1.5%'} paddingBottom={50}>
       <AssetListHeader
         address={null}
         text="Connect your wallet"
@@ -658,7 +656,7 @@ function MyAssets(props: {
 
 
   return (
-    <VStack justifyContent={'space-between'} px={'1.2%'} spacing={7} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} paddingBottom={50}>
+    <VStack height={`52%`} justifyContent={'space-between'} px={'1.2%'} spacing={7} backgroundColor={"#581F50"} width={'29%'} paddingTop={'1.5%'} paddingBottom={50}>
       <AssetListHeader
         isTesting={props.isTesting}
         address={props.address}
@@ -936,7 +934,7 @@ function ThereIsNoOneHere(props: {
   lib: typeof CardanoSerializationLib;
 }) {
   return (
-    <VStack justifyContent={'space-between'} spacing={4} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} px={'2.5%'} paddingBottom={50}>
+    <VStack justifyContent={'space-between'} spacing={4} backgroundColor={"#581F50"} width={'29%'} height={'52%'} paddingTop={'1.5%'} px={'2.5%'} paddingBottom={50}>
       {/*<VStack spacing={1}>*/}
         <AssetListHeader
           text="Invite someone to trade"
@@ -1008,7 +1006,7 @@ function AddAsset(props: {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen} width={'77%'} height={props.height} fontFamily={'Syne'} fontSize={{ base: "0.9rem", md: "1.20rem", lg: "1.40rem", xl: "1.6rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}>
+      <Button onClick={onOpen} width={'77%'} height={props.height} fontFamily={'Syne'} fontSize={{ base: "0.8rem", md: "1rem", lg: "1rem", xl: "1.4rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}>
         ADD ASSET
       </Button>
       <AssetSelector

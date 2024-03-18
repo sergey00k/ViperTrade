@@ -13,7 +13,8 @@ import {
   BoxProps,
   useColorModeValue,
   IconProps,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"; 
+import { useState } from "react";
 import { BigNum } from "@emurgo/cardano-serialization-lib-browser";
 import UnitDisplay from "./UnitDisplay";
 import EditableValue from "./EditableValue";
@@ -28,6 +29,7 @@ import { Theme } from "../Theme";
 import { db } from "../Storage/DB";
 import { useLiveQuery } from "dexie-react-hooks";
 import Hidden from "./Hidden";
+import { useEffect } from "react";
 
 type AssetProps = {
   isLocked: boolean;
@@ -79,9 +81,9 @@ export default function Asset(props: AssetProps & BoxProps) {
 
   const colorMode = useColorModeValue(
     {
-      color: "black",
-      bgColor: "accent.500",
-      bgHoverColor: "accent.600",
+      color: "white",
+      bgColor: "#2C2D2D",
+      bgHoverColor: "accentDark.900",
       colorADA: "white",
       bgColorADA: "accentDark.700",
       bgHoverColorADA: "accentDark.900",
@@ -89,9 +91,9 @@ export default function Asset(props: AssetProps & BoxProps) {
     },
     {
       color: "white",
-      bgColor: "accentDarkMode.600",
-      bgHoverColor: "accentDarkMode.500",
-      colorADA: "black",
+      bgColor: "#2C2D2D",
+      bgHoverColor: "accentDark.900",
+      colorADA: "white",
       bgColorADA: "accent.300",
       bgHoverColorADA: "accent.100",
       adaImg: adaDark,
@@ -113,9 +115,18 @@ export default function Asset(props: AssetProps & BoxProps) {
     console.log('when ADA this prints')
   } else {
     src = props.asset.metadata.src;
-    console.log(src)
-    console.log('this prints')
   }
+  const [assetContainerHeight, setAssetContainerHeight] = useState(40)
+
+  useEffect(() => {
+    const displayName = props.asset.metadata.displayName as string
+    if (displayName?.length > 9) { 
+      setAssetContainerHeight(60)
+    }
+    else if (displayName?.length > 30) {
+      setAssetContainerHeight(80)
+    }
+  }, [props.asset.metadata.displayName])
 
   return (
     <Box
@@ -124,14 +135,12 @@ export default function Asset(props: AssetProps & BoxProps) {
       color={textColor}
       _hover={{ bg: hoverColor }}
       rounded={8}
-      onClick={onToggle}
       cursor="pointer"
-      overflow="hidden"
-      height={10}
       width={"100%"}
       {...rest}
+      alignItems={"stretch"}
     >
-      <Collapse startingHeight={"52px"} in={isOpen} style={{ width: "100%" }}>
+      <Collapse startingHeight={`${assetContainerHeight}px`} in={isOpen} style={{ width: "100%" }}>
         <Flex paddingLeft={2} direction="row" alignItems={"stretch"} alignSelf="stretch">
           <LockStrip type={isLocked ? "Locked" : "Unlocked"} isOpen={isOpen} />
           <VStack
@@ -166,7 +175,7 @@ export default function Asset(props: AssetProps & BoxProps) {
               <HStack>
                 <Center>
                   {props.onValueSubmit ? (
-                    <Box onClick={(e) => e.stopPropagation()} color={"black"}>
+                    <Box onClick={(e) => e.stopPropagation()} color={"white"}>
                       <EditableAmount
                         isADA={props.asset.kind === "ADA"}
                         maxValue={
@@ -218,7 +227,7 @@ function LockStrip(props: {
   return props.type === "Locked" ? (
     <Strip
       icon={Icons.Lock}
-      color="black"
+      color="transparent"
       text="Locked"
       isOpen={props.isOpen}
     />
@@ -381,7 +390,7 @@ type EditableAmountProps = {
 function EditableAmount(props: EditableAmountProps) {
   const colorMode = useColorModeValue(
     {
-      color: "black",
+      color: "white",
       borderColor: "#A53135",
       borderActiveColor: "#822329",
       adaColor: "white",

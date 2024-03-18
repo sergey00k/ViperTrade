@@ -84,8 +84,7 @@ export default function Trade(props: {
       bgSize="cover"
       bgPosition="center"
       minHeight="100vh"
-      paddingTop={0}
-      paddingBottom={'27%'} //300
+      paddingTop={0} //300 paddingBottom={'27%'}
       position={'absolute'}
       top={65}
       left={0}
