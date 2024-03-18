@@ -13,7 +13,7 @@ export default class BlockFrostAPI implements Types.API {
 
   constructor(networkID: NetworkID) {
     const getUrl = window.location;
-    const websitePath = getUrl.protocol + "//" + getUrl.host + "/";
+    const websitePath = getUrl.protocol + "//" + getUrl.host + "/"; // getUrl.protocol getUrl.host
 
     const mainnetPath = "api/blockfrost/mainnet";
     const preprodPath = "api/blockfrost/preprod";

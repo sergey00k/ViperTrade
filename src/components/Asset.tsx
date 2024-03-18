@@ -110,8 +110,11 @@ export default function Asset(props: AssetProps & BoxProps) {
     bgColor = colorMode.bgColorADA;
     hoverColor = colorMode.bgHoverColorADA;
     symbol = props.asset.metadata.symbol;
+    console.log('when ADA this prints')
   } else {
     src = props.asset.metadata.src;
+    console.log(src)
+    console.log('this prints')
   }
 
   return (
@@ -124,7 +127,7 @@ export default function Asset(props: AssetProps & BoxProps) {
       onClick={onToggle}
       cursor="pointer"
       overflow="hidden"
-      height={'25%'}
+      height={10}
       width={"100%"}
       {...rest}
     >

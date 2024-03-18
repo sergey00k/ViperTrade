@@ -130,24 +130,25 @@ export default function Home(props: { channelState: ChannelState }) {
                   </Box>
                 </Box>
             </Link>
-            <Link as={ReachLink} to="/guide" height={50} style={{ textDecoration: 'none', width: '48.5%'  }}>
+            <a href="http://discord.gg/n6DkQ9bWvf" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', width: '48.5%', height: 50 }}>
               <Button fontFamily={'Syne'} fontSize={{ base: "0.9rem", md: "1.20rem", lg: "1.40rem", xl: "1.40rem" }} fontWeight={'bold'} backgroundColor="#B1232F" width={'100%'} height={'100%'} color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}>
                 HELP
               </Button>
-            </Link>
+            </a>
           </Flex>
         </VStack>
         <VStack>
         <HStack spacing={3}>
-          <Link as={ReachLink} to="/session">
+          <a href="http://discord.gg/n6DkQ9bWvf" target="_blank" rel="noopener noreferrer">
             <Icons.Discord />
-          </Link>
-          <Link as={ReachLink} to="/session">
+          </a>
+
+          <a href="https://twitter.com/vipercoinada" target="_blank" rel="noopener noreferrer">
             <Icons.Twitter />
-          </Link>
-          <Link as={ReachLink} to="/session">
+          </a>
+          <a href="http://discord.gg/n6DkQ9bWvf" target="_blank" rel="noopener noreferrer">
             <TbWorld color={'white'} style={{ fontSize: '30px', marginTop: '-6' }}/>
-          </Link>
+          </a>
         </HStack>
         <Text fontSize={12} color={'white'} fontFamily={'Prompt-Light-Italic'}> © 2024 VIPER All Rights Reserved</Text>
         </VStack>

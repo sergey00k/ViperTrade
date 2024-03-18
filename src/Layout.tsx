@@ -45,7 +45,6 @@ import ComponentErrorBoundary from "./components/ErrorBoundary/ComponentErrorBou
 import ViperLogo from "./components/Logo";
 import { usePWAInstall } from "./Hooks/PWA";
 import * as CardanoSerializationLib from "@emurgo/cardano-serialization-lib-browser";
-import arrow from "./assets/img/viper/arrow/arrow.png"
 
 ///////////// image imports /////////////////
 import backgroundImg from "./assets/img/viper/viper-background-img.png"

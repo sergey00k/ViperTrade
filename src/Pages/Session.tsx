@@ -620,7 +620,7 @@ function ConnectWallet(props: {
         networkID={null}
         commission={props.lib.BigNum.zero()}
       />
-      <Image width={'67%'} height={'60%'} src={viperWallet}/>
+      <Image style={{ aspectRatio:'1.2' }} height={'60%'} src={viperWallet}/> {/*width={'67%'}*/}
       <WalletConnectButton 
         onWalletChange={props.onWalletChange}
         lib={props.lib}
@@ -936,7 +936,7 @@ function ThereIsNoOneHere(props: {
   lib: typeof CardanoSerializationLib;
 }) {
   return (
-    <VStack justifyContent={'space-between'} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} px={'2.5%'} paddingBottom={50}>
+    <VStack justifyContent={'space-between'} spacing={4} backgroundColor={"#581F50"} width={'29%'} height={'100%'} paddingTop={'1.5%'} px={'2.5%'} paddingBottom={50}>
       {/*<VStack spacing={1}>*/}
         <AssetListHeader
           text="Invite someone to trade"
@@ -944,11 +944,11 @@ function ThereIsNoOneHere(props: {
           address={null}
           commission={props.lib.BigNum.zero()}
         />
-        <Image width={'83.6%'} src={viperMail}/>
-        <Box width={'100%'} height={'15.4%'}>
+        <Image height={'54%'} src={viperMail}/>
+        <Box width={'100%'} height={'13.5%'}>
         <Copy  label={"Link Copied!"} copy={props.link}>
           <ToolTip  width={'100%'} height={'100%'} label={props.link}>
-            <Button width={'100%'} height={'100%'} fontFamily={'Syne'} fontSize={{ base: "0.9rem", md: "1.20rem", lg: "1.40rem", xl: "1.6rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}
+            <Button width={'100%'} height={'100%'} fontFamily={'Syne'} fontSize={{ base: "0.8rem", md: "1rem", lg: "1rem", xl: "1.4rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}
               aria-label="Copy"
               leftIcon={<Icons.ContentCopy />}
             >
