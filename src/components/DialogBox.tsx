@@ -29,9 +29,9 @@ export function DialogBox(props: DialogBoxProps): JSX.Element {
         <Box __css={styles.header}>
           <Flex>
             <HStack>
-              <Center>{icon ? icon : <></>}</Center>
-              {headerText && icon ? <Text>{"-"}</Text> : <></>}
-              {headerText ? <Text>{headerText}</Text> : <></>}
+              <Center color={'white'}>{icon ? icon : <></>}</Center>
+              {headerText && icon ? <Text color={'white'}>{"-"}</Text> : <></>}
+              {headerText ? <Text color={'white'}>{headerText}</Text> : <></>}
             </HStack>
             <Spacer />
             {onClose ? <CloseButton onClick={onClose} /> : <></>}

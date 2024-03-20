@@ -20,9 +20,10 @@ export default function OfferReponsePrompt(props: {
     <DialogBox
       icon={icon}
       headerText="Rejected"
-      colorScheme={color}
+      colorScheme={"primary"}
       onClose={props.onReset}
       width={240}
+      color={'white'}
     >
       {titleText}
     </DialogBox>

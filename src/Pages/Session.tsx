@@ -758,14 +758,16 @@ function SessionController(props: {
     );
   } else if (props.offer.kind === "TheyArePending") {
     component = (
+      <Box marginTop={44}>
       <DialogBox
         icon={<Icons.Info />}
         headerText=" Waiting"
         colorScheme="primary"
         maxWidth={240}
       >
-        <Text textAlign={"center"}>Waiting for signature...</Text>
+        <Text textAlign={"center"} color={'white'}>Waiting for signature...</Text>
       </DialogBox>
+      </Box>
     );
   } else if (props.offer.kind === "IAmPending") {
     const witness = props.offer.witness;
@@ -794,17 +796,21 @@ function SessionController(props: {
     );
   } else if (props.offer.kind === "OfferAccept") {
     component = (
+      <Box marginTop={44}>
       <OfferReponsePrompt
         reponse={"Accepted"}
         onReset={() => props.session.resetOffer()}
       ></OfferReponsePrompt>
+      </Box>
     );
   } else if (props.offer.kind === "OfferReject") {
     component = (
+      <Box marginTop={44}>
       <OfferReponsePrompt
         reponse={"Rejected"}
         onReset={() => props.session.resetOffer()}
       ></OfferReponsePrompt>
+      </Box>
     );
   }
   return (
@@ -832,7 +838,7 @@ function SessionController(props: {
           colorScheme="primary"
           maxWidth={240}
         >
-          <Text textAlign={"center"}>{props.missMatchError.msg}</Text>
+          <Text color={'white'} textAlign={"center"}>{props.missMatchError.msg}</Text>
         </DialogBox>
       ) : (
         <></>
@@ -899,7 +905,7 @@ function TheirAssets(props: {
   commission: BigNum;
 }) {
   return (
-    <VStack spacing={6} width={assetWidths}>
+    <VStack justifyContent={'space-between'} spacing={4} backgroundColor={"#581F50"} width={'29%'} height={'52%'} paddingTop={'1.5%'} px={'2.5%'} paddingBottom={50}>
       <AssetListHeader
         isTesting={props.isTesting}
         address={props.address}
@@ -907,11 +913,6 @@ function TheirAssets(props: {
         networkID={props.networkID}
         commission={props.commission}
       />
-      {props.theirSelectedAssets.length === 0 ? (
-        <AssetListEmptyState version="TheyWillSend" locked={props.isLocked}/>
-      ) : (
-        <></>
-      )}
       <AssetList
         isLocked={props.isLocked}
         isEditable={false}
@@ -925,6 +926,11 @@ function TheirAssets(props: {
           return;
         }}
       ></AssetList>
+      {props.theirSelectedAssets.length === 0 ? (
+        <AssetListEmptyState version="TheyWillSend" locked={props.isLocked}/>
+      ) : (
+        <></>
+      )}
     </VStack>
   );
 }
@@ -979,14 +985,13 @@ function AssetListEmptyState(props: {
   if (props.version === "TheyWillSend") {
     text = "They haven't added any assets!";
   }
-
   return (
       <Text textAlign={'center'}
             fontSize={{ base: "0.6rem", md: "0.89rem", lg: "1rem", xl: "1.3rem" }}
             fontWeight={"bold"}
             color={'white'}
             fontFamily={'syne'}
-            style={props.locked ? { marginTop: 71 } : {}}>
+            style={props.locked ? { marginTop: 50 } : {}}>
         {text}
       </Text>
   );

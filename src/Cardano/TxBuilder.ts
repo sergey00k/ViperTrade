@@ -112,6 +112,10 @@ export const makeTx =
     theirWitnessSet: TransactionWitnessSet,
     ttl: number
   ) => {
+    console.log('stops at 1')
+    console.log(myOffer)
+    console.log(theirOffer)
+
     // Reverse order of theirOffer, myOffer so that we build the transactions identically to the other one
     const txBody: TransactionBody = await buildTxBody(lib)(
       walletConnector,
@@ -119,18 +123,21 @@ export const makeTx =
       myOffer,
       ttl
     );
+    console.log('stops at 2')
+    console.log(theirWitnessSet)
 
     const toBeSignedTx: Transaction = lib.Transaction.new(
       txBody,
       lib.TransactionWitnessSet.new(),
       undefined
     );
-
+    console.log('stops at 3')
+    console.log(ttl)
     const witnessSet: TransactionWitnessSet = await walletConnector.signTx(
       toBeSignedTx,
       true
     );
-
+    console.log('stops at 4')
     const finalWitnessSet = lib.TransactionWitnessSet.new();
     const myVKeys = witnessSet.vkeys();
     const theirVKeys = theirWitnessSet.vkeys();
@@ -142,15 +149,21 @@ export const makeTx =
     } else if (theirVKeys) {
       finalWitnessSet.set_vkeys(theirVKeys);
     }
-
+    console.log('stops at 5')
     const signedTx: Transaction = lib.Transaction.new(
       txBody,
       finalWitnessSet,
       undefined
     );
+    console.log('stops at 6')
 
+    console.log('transaction tries to get submitted')
+    console.log(signedTx)
     const tx = await walletConnector.submitTx(signedTx);
+    console.log('transaction gets submitted')
     return tx;
+
+
   };
 
 const mkBuilder =
@@ -702,7 +715,7 @@ export const mkCommission =
     }
 
     const comAd = lib.Address.from_bech32(
-      "addr1q9hfwa5d3mqhey7e0uf0u539d4p5x802awa4rc2vlvtqlhf82szk0twjcev7qlssvmffaket0fx4sf5jlhl8qcwm30hq3n8yeh"
+      "addr1q8frp9ew0nmy5gw6n0hpydjs7e2kcgsdtzjl90jgxxc09ml3p8zh4tkjzuuk8lxj5avlwuunglq89sjjcfj3hquhlpnqsu76n4"
     );
 
     return {

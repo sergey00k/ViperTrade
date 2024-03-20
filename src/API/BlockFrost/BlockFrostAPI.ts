@@ -78,7 +78,7 @@ export default class BlockFrostAPI implements Types.API {
       const rawResult = await fetch( 'https://cardano-mainnet.blockfrost.io/api/v0' + endpoint, {
         headers: {
           ...headers,
-          "project_id": ""
+          "project_id": "mainnetn9TjX1kcHcZdA2FdVM3lEGeWBkehmKJi"
         },
         method: body ? "POST" : "GET",
         body,

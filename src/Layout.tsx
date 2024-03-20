@@ -256,13 +256,13 @@ function SessionStatus(props: { status: ChannelState }) {
   let bgColor = "#A53135";
   let hoverColor = "#822329";
 
-  if (props.status === "Destroyed") {
+  /*if (props.status === "Destroyed") {
     bgColor = "failure";
     hoverColor = "failure.600";
   } else if (props.status === "Connected") {
     bgColor = "success";
     hoverColor = "success.600";
-  }
+  }*/
 
   return (
     <ToolTip label={"The state of your trade connection"} isOpen={hovering}>
