@@ -1,9 +1,5 @@
 
 
-## Support
-
-- [Twitter](https://twitter.com/_atomicswap)
-- [Discord](https://discord.com/invite/ZqpN4TuJ6a)
 
 ## Features
 
@@ -55,6 +51,7 @@ export const BLOCKFROST_ID_TESTNET = "...";
 
 ## **Authors**
 
+All Frontend implementation was done by [sergey00k](https://github.com/sergey00k).
+
 This project derives its backend structure from the people who contribute — [contribute](CONTRIBUTING.md) and [honungsburk](https://github.com/honungsburk).
 
-All Frontend implementation was done by [sergey00k](https://github.com/sergey00k).
