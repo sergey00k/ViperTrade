@@ -9,14 +9,27 @@ import {
   ModalContent,
   ModalBody,
   ModalCloseButton,
+  Box
 } from "@chakra-ui/react";
 import CopyCard from "../CopyCard";
 import * as Icons from "../Icons";
 
+////////image imports //////////////
+import backgroundImg from "../../assets/img/viper/viper-background-img.png";
+
 export default function ErrorOverlay(props: { error: any; title: string }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <>
+    <Box
+    bgImage={backgroundImg} 
+    bgSize="cover"
+    bgPosition="center"
+    minHeight="100vh"
+    flex={1}
+    width={'100%'}
+    height={'100%'}
+    paddingTop={180}
+    >
       <IconButton
         variant={"ghost"}
         colorScheme="failure"
@@ -33,12 +46,9 @@ export default function ErrorOverlay(props: { error: any; title: string }) {
           <ModalBody>
             <VStack spacing={2}>
               <VStack spacing={1}>
-                <Text fontWeight={"bold"} maxW={300} textAlign={"center"}>
+                <Text fontWeight={"bold"} color={'white'} maxW={300} textAlign={"center"}>
                   Please, report the error by copying the error below and post
                   it to the appopriate channel on discord.
-                </Text>
-                <Text fontSize={12} textAlign={"center"}>
-                  (Discord link is at the bottom of the page)
                 </Text>
               </VStack>
               <CopyCard value={props.error}></CopyCard>
@@ -46,6 +56,6 @@ export default function ErrorOverlay(props: { error: any; title: string }) {
           </ModalBody>
         </ModalContent>
       </Modal>
-    </>
+    </Box>
   );
 }

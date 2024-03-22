@@ -4,6 +4,7 @@ import { Lock, Unlock } from "../../components/Icons";
 import ToolTip from "../../components/ToolTip";
 
 type LockAndSignProps = {
+  isAdaForFee: boolean | undefined;
   isMatching: boolean;
   isLocked: boolean;
   theyAreLocked: boolean;
@@ -55,7 +56,7 @@ export default function LockAndSign(props: LockAndSignProps) {
         {lockIcon(props.theyAreLocked)}
       </HStack>
       <Button width={122} height={33} fontFamily={'Syne'} fontSize={{ base: "0.72rem", md: "1rem", lg: "1.16rem", xl: "1.3rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}
-        disabled={!props.isLocked || !props.isMatching}
+        disabled={!props.isLocked || !props.isMatching || !props.isAdaForFee}
         isLoading={isLoading}
         loadingText="Creating Tx"
         onClick={() => {

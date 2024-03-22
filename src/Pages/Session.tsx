@@ -63,6 +63,7 @@ import swapPng from "../assets/img/viper/swap-min.png"
 
 //////////// animation imports /////////////
 import FireAnimation from "../components/FireAnimationLogo"
+import HasNoWallet from "./Session/HasNoWallet";
 
 
 function Session(props: {
@@ -109,7 +110,7 @@ function Session(props: {
   });
   const navigate = useNavigate();
   const toast = useToast();
-  const commission = props.lib.BigNum.from_str("1000000");
+  const commission = props.lib.BigNum.from_str("0");
 
   ////////////////////////////////////////////////////////////////////////////////
   // Available Value
@@ -162,6 +163,7 @@ function Session(props: {
   const [mySelectedAssets, setMySelectedAssets] = React.useState<
     SelectedAsset[]
   >([]);
+
 
   React.useEffect(() => {
     if (myNetworkID !== null) {
@@ -397,6 +399,12 @@ type LayoutProps = {
 
 function HorizontalLayout(props: LayoutProps) {
     /////////// HEADER ATTEMPT //////////
+    const [isAdaForFee, setIsAdaForFee] = React.useState(false)
+
+    useEffect(() => {
+      const hasAdaAsset = props.mySelectedAssets.some(selectedAsset => selectedAsset.asset.kind === "ADA");
+      setIsAdaForFee(hasAdaAsset);
+    },[props.mySelectedAssets])
 
 
     const fadeInKeyframes = keyframes`
@@ -446,8 +454,8 @@ function HorizontalLayout(props: LayoutProps) {
             <Box zIndex={2} position={'relative'}>
               <ViperLogo boxSize="140px"/>
             </Box>
-            <Box zIndex={1} width={'55%'} position={'relative'} bottom={20} marginTop={-50} {...(isHovered ? { opacity: 0, animation: `${fadeInKeyframes} 0.5s forwards`} : { opacity: 1, animation: `${fadeOutKeyframes} 0.7s forwards` })}>
-             {(isVisible ? <FireAnimation /> : <></>)}
+            <Box zIndex={1} width={'55%'} position={'relative'} bottom={20} marginTop={-50}>
+             {(isVisible && isHovered ? <FireAnimation /> : <></>)}
             </Box>
           </VStack>
         <Heading  color={'white'} position={'absolute'} top={185} fontFamily={'syne'} fontWeight={'bold'} fontSize={{ base: "1rem", md: "1.4rem", lg: "1.6rem", xl: "2.21rem" }}>
@@ -458,6 +466,7 @@ function HorizontalLayout(props: LayoutProps) {
         </Text> {!props.hasWallet ? (<Image  src={swapPng} position={'absolute'} top={264} height={12}/>) : <></>} 
       </VStack>
       <SessionController
+          isAdaForFee={isAdaForFee}
           lib={props.lib}
           numberOfAssets={
             props.mySelectedAssets.length + props.theirSelectedAssets.length
@@ -470,6 +479,9 @@ function HorizontalLayout(props: LayoutProps) {
           offer={props.offer}
           missMatchError={props.tradeMissMatch}
         />
+      {(!isAdaForFee && props.hasWallet ? <DialogBox icon={<Icons.Info />} headerText=" Warning" colorScheme="primary" maxWidth={240}>
+        <Text color={'white'}>You must add ADA to the asset list for network fees to be covered.</Text>
+      </DialogBox> : <></>)}
       </VStack>
       <TheirSide
         lib={props.lib}
@@ -618,7 +630,7 @@ function ConnectWallet(props: {
         networkID={null}
         commission={props.lib.BigNum.zero()}
       />
-      <Image style={{ aspectRatio:'1.2' }} height={'60%'} src={viperWallet}/> {/*width={'67%'}*/}
+      <Image style={{ aspectRatio:'1.2' }} height={'60%'} src={viperWallet}/> {/*intial viper wallet sizing ----> style={{ aspectRatio:'1.2' }} height={'60%'} */}
       <WalletConnectButton 
         onWalletChange={props.onWalletChange}
         lib={props.lib}
@@ -714,6 +726,7 @@ function MyAssets(props: {
 }  
 
 function SessionController(props: {
+  isAdaForFee?: boolean;
   isTesting: boolean;
   numberOfAssets: number;
   wallet?: BasicWallet;
@@ -733,6 +746,7 @@ function SessionController(props: {
     const wallet = props.wallet;
     component = (
       <LockAndSign
+        isAdaForFee={props.isAdaForFee}
         isMatching={props.missMatchError === undefined && !props.isTesting}
         isLocked={props.myLock}
         theyAreLocked={props.theirLock}
@@ -823,7 +837,7 @@ function SessionController(props: {
           colorScheme="secondary"
           maxWidth={240}
         >
-          <Text textAlign={"center"}>
+          <Text color={'white'} textAlign={"center"}>
             You are in test mode and won&apos;t be able to sign.
           </Text>
         </DialogBox>
@@ -948,7 +962,7 @@ function ThereIsNoOneHere(props: {
           address={null}
           commission={props.lib.BigNum.zero()}
         />
-        <Image height={'54%'} src={viperMail}/>
+        <Image height={'54%'} src={viperMail}/>{/*intial viper mail sizing ----> height={'54%'} */}
         <Box width={'100%'} height={'13.5%'}>
         <Copy  label={"Link Copied!"} copy={props.link}>
           <ToolTip  width={'100%'} height={'100%'} label={props.link}>

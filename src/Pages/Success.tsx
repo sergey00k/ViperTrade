@@ -28,15 +28,15 @@ function Success() {
       <Spacer />
       <VStack>
         <Heading as="h1" size="4xl" color={'white'} fontFamily={'syne'} fontWeight={'bold'}>
-          Sssuccess!
+          SSSUCCESS!
         </Heading>
         <Link as={ReachLink} to="/home" style={{ textDecoration: 'none' }}> 
           <Box zIndex={2} position={'relative'}>
             <ViperLogo boxSize={'140px'}/>
           </Box>
           <Box zIndex={1} width={'55%'} position={'relative'} bottom={8} marginTop={-50} left={8}>
-             <FireAnimation />
-            </Box>
+            <FireAnimation />
+          </Box>
         </Link>
         <Box  height={`40%`} justifyContent={'center'} alignItems={'center'} textAlign="center" px={'1.2%'} backgroundColor={"#581F50"} width={'50%'} paddingTop={'1.5%'} paddingBottom={'1.5%'}>
           <Text color={'white'} fontSize={"xl"} fontFamily={'syne'} fontWeight={'bold'}>

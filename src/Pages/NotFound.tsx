@@ -1,9 +1,21 @@
-import { Center, Heading, Spacer, VStack } from "@chakra-ui/react";
+import { Center, Heading, Spacer, VStack, Box } from "@chakra-ui/react";
 import { Browser } from "../components/ChakraKawaii";
+
+////////image imports //////////////
+import backgroundImg from "../assets/img/viper/viper-background-img.png";
 
 export default function NotFound() {
   return (
-    <>
+    <Box
+    bgImage={backgroundImg} 
+    bgSize="cover"
+    bgPosition="center"
+    minHeight="100vh"
+    flex={1}
+    width={'100%'}
+    height={'100%'}
+    paddingTop={180}
+    >
       <Spacer></Spacer>
       <Center>
         <VStack>
@@ -11,6 +23,6 @@ export default function NotFound() {
           <Heading size={"xl"}>404 - Page Not Found</Heading>
         </VStack>
       </Center>
-    </>
+    </Box>
   );
 }

@@ -1,5 +1,6 @@
 import { NetworkID } from "cardano-web-bridge-wrapper";
 import * as Types from "./Types";
+import { BLOCKFROST_API_KEY } from "../../../functions/src/secrets"
 
 function validator<A>(isValid: (x: any) => x is A, x: any): A | Types.Error {
   if (isValid(x) || Types.isError(x)) {
@@ -78,7 +79,7 @@ export default class BlockFrostAPI implements Types.API {
       const rawResult = await fetch( 'https://cardano-mainnet.blockfrost.io/api/v0' + endpoint, {
         headers: {
           ...headers,
-          "project_id": "mainnetn9TjX1kcHcZdA2FdVM3lEGeWBkehmKJi"
+          "project_id": BLOCKFROST_API_KEY
         },
         method: body ? "POST" : "GET",
         body,
