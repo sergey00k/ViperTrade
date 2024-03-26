@@ -121,7 +121,7 @@ function AssetSelectorList(props: {
       ) : (
         <Center>
           <VStack>
-            <Ghost size={120} mood="ko" color="#E0E4E8" />
+            <Box height={270} backgroundColor={'transparent'}></Box>
             <Text fontWeight="bold" color="white">
               No Assets
             </Text>

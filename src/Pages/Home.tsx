@@ -19,12 +19,12 @@ import {
 import { keyframes } from "@emotion/react"
 import { Link as ReachLink } from "react-router-dom";
 import { ChannelState } from "../Network/Channel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 import * as Icons from "../components/Icons";
 import { TbWorld } from "react-icons/tb";
 
 // <------------- image imports ------------- >
-import backgroundImg from "../assets/img/viper/viper-background-img.png";
+import backgroundImg from "../assets/img/viper/viper-background-img.png"; 
 
 import nftCoin1 from "../assets/img/viper/1.png"
 import nftCoin2 from "../assets/img/viper/2.png"
@@ -37,7 +37,7 @@ import nftCoin8 from "../assets/img/viper/8.png"
 import nftCoin9 from "../assets/img/viper/9.png"
 
 // <------------ animation imports ------------ >
-import FireAnimation from "../components/FireAnimation"
+const FireAnimation = lazy(() => import("../components/FireAnimation"));
 
 
 export default function Home(props: { channelState: ChannelState }) {
@@ -118,7 +118,7 @@ export default function Home(props: { channelState: ChannelState }) {
         </Flex>
         <Flex flexDirection={'column'} justifyContent="space-between" alignItems="center" width={'37%'} height={'100%'} paddingBottom={70}> {/* 490 pbottom*/}
         <VStack alignItems="center" width={'100%'}>
-          <Text color={'white'} fontFamily={'Prompt-Light-Italic'} fontSize={{ base: "0.84rem", md: "1.20rem", lg: "1.45rem", xl: "1.95rem" }}>Peer-To-Peer Trades Done Right</Text>
+          <Text color={'white'} fontFamily={'Prompt-Light-Italic'} fontSize={{ base: "0.84rem", md: "1.20rem", lg: "1.35rem", xl: "1.85rem" }}>Peer-To-Peer Trades Done Right</Text>
           <Flex justifyContent={'space-between'} width={'100%'}>
             <Link as={ReachLink} to="/session" style={{ textDecoration: 'none', width: '48.5%'  }} height={50}>
               <Button onMouseEnter={onOpen} onMouseLeave={onClose} zIndex={2} /*fontSize={22}*/ fontSize={{ base: "0.9rem", md: "1.20rem", lg: "1.40rem", xl: "1.40rem" }} fontFamily={'Syne'} boxShadow={"none"} fontWeight={'bold'} backgroundColor="#B1232F" color='white' width={'100%'} height={'100%'} textDecoration={'none'} rounded={0} _hover={{ backgroundColor: "#B82E3D", textDecoration: 'none' }}>

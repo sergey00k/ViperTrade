@@ -13,7 +13,7 @@ import {
   Image
 } from "@chakra-ui/react";
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { keyframes } from "@emotion/react"
 
 
@@ -62,8 +62,7 @@ import ViperLogo from "../components/Logo";
 import swapPng from "../assets/img/viper/swap-min.png"
 
 //////////// animation imports /////////////
-import FireAnimation from "../components/FireAnimationLogo"
-import HasNoWallet from "./Session/HasNoWallet";
+const FireAnimation = lazy(() => import("../components/FireAnimationLogo"));
 
 
 function Session(props: {
@@ -110,7 +109,7 @@ function Session(props: {
   });
   const navigate = useNavigate();
   const toast = useToast();
-  const commission = props.lib.BigNum.from_str("0");
+  const commission = props.lib.BigNum.from_str("3000000"); ////////////////////////////////////////////////////////// change to 0 when no commission 
 
   ////////////////////////////////////////////////////////////////////////////////
   // Available Value

@@ -71,7 +71,7 @@ const buildTxBody =
     const feeConfig = mkFeeConfig(lib)(networkID, networkParameters);
     const txBuilder = constructTxBuilder(lib)(
       feeConfig,
-      false,       /////////////////////////////////////////////////////////////////////// switch from commission to false to deactivate fees and opposite to reactivate
+      commission,       /////////////////////////////////////////////////////////////////////// switch from commission to false to deactivate fees and opposite to reactivate
       myOffer,
       theirOffer,
       ttl
@@ -235,7 +235,7 @@ export const constructTxBuilder =
   (lib: typeof CardanoSerializationLib) =>
   (
     feeConfig: FeeConfig,
-    commission: Commission | boolean | undefined,
+    commission: Commission | undefined,  ///////////////////////////////////////////////// add boolean type when turning commission off
     myOffer: OfferParams,
     theirOffer: OfferParams,
     ttl: number
@@ -251,7 +251,7 @@ export const constructTxBuilder =
     const outputs: TransactionOutput[] = [];
 
     // Commission
-    /*if (commission) {
+    if (commission) {
       const totalCommission = commission.commissionFromMe.checked_add(
         commission.commissionFromThem
       );
@@ -260,7 +260,7 @@ export const constructTxBuilder =
         lib.Value.new(totalCommission)
       );
       outputs.push(commissionUtxO);
-    }*/  /////////////////////////////////////////////////////////////////////////////////////////////////uncomment for commission
+    }  /////////////////////////////////////////////////////////////////////////////////////////////////uncomment for commission
 
     // What I should receive
     const whatIRecieve = outputSelection(lib)(
@@ -306,14 +306,14 @@ export const constructTxBuilder =
     let valueTheyNeedToProcure =
       theirOffer.value.checked_add(extraTheyNeedToAdd);
 
-    /*if (commission) {
+    if (commission) {
       valueINeedToProcure = valueINeedToProcure.checked_add(
         lib.Value.new(commission.commissionFromMe)
       );
       valueTheyNeedToProcure = valueTheyNeedToProcure.checked_add(
         lib.Value.new(commission.commissionFromThem)
       );
-    }*/ /////////////////////////////////////////////////////////////////////////////////////////////////uncomment for commission
+    } /////////////////////////////////////////////////////////////////////////////////////////////////uncomment for commission
 
     let thereAreStillUTXOs = true;
     let iterations = 0;
@@ -358,14 +358,14 @@ export const constructTxBuilder =
         .checked_sub(estimated_half_fee)
         .checked_sub(extraTheyNeedToAdd);
 
-      /*if (commission) {
+      if (commission) {
         myChangeEstimate = myChangeEstimate.checked_sub(
           lib.Value.new(commission.commissionFromMe)
         );
         theirChangeEstimate = theirChangeEstimate.checked_sub(
           lib.Value.new(commission.commissionFromThem)
         );
-      }*/  /////////////////////////////////////////////////////////////////////////////////////////////////uncomment for commission
+      }  /////////////////////////////////////////////////////////////////////////////////////////////////uncomment for commission
 
 
       // We not construct the change (which is most likely incorrect for a few iterations of the loop)
@@ -720,8 +720,8 @@ export const mkCommission =
     ); //////// control routed address
 
     return {
-      commissionFromMe: lib.BigNum.from_str("1000000"),
-      commissionFromThem: lib.BigNum.from_str("1000000"), ///// control commision amount
+      commissionFromMe: lib.BigNum.from_str("3000000"),
+      commissionFromThem: lib.BigNum.from_str("3000000"), ///// control commision amount
       commissionAddress: comAd,
     };
   };

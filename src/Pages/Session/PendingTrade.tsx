@@ -1,14 +1,14 @@
 import { Heading, Spacer, Text, VStack, Button, Box } from "@chakra-ui/react";
 import { Browser } from "../../components/ChakraKawaii";
 import Store from "../../Storage/Store";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 
 ////////image imports //////////////
 import backgroundImg from "../../assets/img/viper/viper-background-img.png";
 import ViperLogo from "../../components/Logo";
 
 ////////animation imports //////////////
-import FireAnimation from "../../components/FireAnimationLogo";
+const FireAnimation = lazy(() => import("../../components/FireAnimationLogo"));
 import { keyframes } from "@emotion/react"
 
 function PendingTrade(props: { store?: Store }) {

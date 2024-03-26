@@ -1,5 +1,6 @@
 import { Link, Heading, Image, Spacer, Text, VStack, Box } from "@chakra-ui/react";
 import { Browser } from "../components/ChakraKawaii";
+import { lazy } from "react";
 
 //////////////// image imports ///////////////
 import backgroundImg from "../assets/img/viper/viper-background-img.png";
@@ -7,7 +8,7 @@ import ViperLogo from "../components/Logo";
 import { Link as ReachLink } from "react-router-dom";
 
 //////////// animation imports /////////////
-import FireAnimation from "../components/FireAnimationLogo"
+const FireAnimation = lazy(() => import("../components/FireAnimationLogo"));
 
 function Success() {
   return (

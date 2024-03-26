@@ -108,7 +108,7 @@ function EditableValue(props: {
                   <Center>
                     <Button
                       mt={4}
-                      colorScheme="primary"
+                      width={122} height={33} fontFamily={'Syne'} fontSize={{ base: "0.72rem", md: "1rem", lg: "1.16rem", xl: "1.3rem" }} fontWeight={'bold'} backgroundColor="#B1232F" color='white' rounded={0} _hover={{backgroundColor: "#B82E3D",textDecoration: 'none' }}
                       isDisabled={!(formikProps.isValid && formikProps.dirty)}
                       isLoading={formikProps.isSubmitting}
                       onClick={onClose}
